@@ -1,9 +1,6 @@
 declare module "react-html5-camera-photo" {
   import React from "react";
 
-  type FACING_MODES = "user" | "environment";
-  type IMAGE_TYPES = "png" | "jpg";
-
   interface CameraProps {
     /**
      * Callback called when the camera is started.
@@ -103,4 +100,14 @@ declare module "react-html5-camera-photo" {
   const Camera: React.FC<CameraProps>;
 
   export default Camera;
+
+  export enum FACING_MODES {
+    ENVIRONMENT = "environment",
+    USER = "user",
+  }
+
+  export enum IMAGE_TYPES {
+    JPG = "jpg",
+    PNG = "png",
+  }
 }
