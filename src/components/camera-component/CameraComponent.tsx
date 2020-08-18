@@ -32,7 +32,7 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
       </button>
       <Camera
         onTakePhoto={handleTakePhoto}
-        // isImageMirror={false}
+        isImageMirror={false}
         isFullscreen={true}
         idealFacingMode={cameraFacingMode}
       />

@@ -89,3 +89,10 @@
 .tui-image-editor-container .tui-image-editor-menu > li.tie-btn-deleteAll {
   display: none;
 }
+
+.tui-image-editor-container
+  .tui-image-editor-menu-filter
+  li:first-child
+  .tui-image-editor-checkbox-wrap {
+  background: rgba(0, 0, 0, 0.3);
+}

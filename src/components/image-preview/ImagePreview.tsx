@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-// import Modal from "react-modal";
+import React, { useRef, useState } from "react";
 
 import ImageEditor from "@toast-ui/react-image-editor";
 import "tui-image-editor/dist/tui-image-editor.css";
@@ -10,28 +9,70 @@ import "./ImagePreview.css";
 import Loader from "../loader/Loader";
 
 interface ImagePreviewProps {
-  show: boolean;
   dataUri: string;
   handleClose: () => void;
 }
 
 const ImagePreview: React.FC<ImagePreviewProps> = ({
-  // show,
   dataUri,
   handleClose,
 }) => {
-  const { generatePdfFromUrl, progress } = useTessaract();
-  const { showProgress } = progress;
+  const [showLoader, setShowLoader] = useState(false);
+  const { generatePdfFromUrl } = useTessaract();
   const imageEditorRef = useRef(null);
+
+  const sharpenImage = (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      if (imageEditorRef && imageEditorRef.current) {
+        const editorInstance = (imageEditorRef as any).current.getInstance();
+        editorInstance
+          .applyFilter("sharpen")
+          .then((_obj: any) => {
+            resolve();
+          })
+          .catch((_e: Error) => reject());
+      } else {
+        reject();
+      }
+    });
+  };
+
+  const convertImagetoGrayScale = (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      if (imageEditorRef && imageEditorRef.current) {
+        const editorInstance = (imageEditorRef as any).current.getInstance();
+        editorInstance
+          .applyFilter("grayscale")
+          .then((_obj: any) => {
+            resolve();
+          })
+          .catch((_e: Error) => reject());
+      } else {
+        reject();
+      }
+    });
+  };
+
   const convertToPdf = async () => {
     if (imageEditorRef && imageEditorRef.current) {
-      const editorInstance = (imageEditorRef as any).current.getInstance();
-      const imgUrl = editorInstance.toDataURL({
-        format: "jpeg",
-        multiplier: 5,
-      });
-      await generatePdfFromUrl(imgUrl, "sample");
-      handleClose();
+      try {
+        const editorInstance = (imageEditorRef as any).current.getInstance();
+        setShowLoader(true);
+        await convertImagetoGrayScale();
+        await sharpenImage();
+        const imgUrl = editorInstance.toDataURL({
+          format: "jpeg",
+          multiplier: 5,
+        });
+        await generatePdfFromUrl(imgUrl, "sample");
+        alert("Pdf downloaded successfully");
+        setShowLoader(false);
+        handleClose();
+      } catch (error) {
+        alert("Something went wrong");
+        setShowLoader(false);
+        handleClose();
+      }
     }
   };
 
@@ -64,7 +105,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
         }}
         usageStatistics={false}
       />
-      {showProgress ? <Loader /> : null}
+      {showLoader ? <Loader /> : null}
     </div>
   );
 };

@@ -1,4 +1,7 @@
-button {
+button.close-btn,
+button.camera-switch-btn {
+  width: 50px;
+  height: 50px;
   background: antiquewhite;
   color: brown;
   border-radius: 50%;
@@ -8,21 +11,13 @@ button {
 }
 
 button.close-btn {
-  width: 30px;
-  height: 30px;
+  font-size: 20px;
+  font-weight: 600;
   left: 10px;
   top: 10px;
 }
 
 button.camera-switch-btn {
-  width: 50px;
-  height: 50px;
   right: 10px;
   bottom: 20px;
 }
-
-/* @media only screen and (max-width: 440px) {
-  .react-html5-camera-photo #container-circles {
-    bottom: -40%;
-  }
-} */

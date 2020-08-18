@@ -15,10 +15,6 @@ const FileInput: React.FC<FileInputProps> = ({ handleFileUpload }) => {
         const file = acceptedFiles[0];
         reader.readAsDataURL(file);
         reader.onload = () => {
-          console.log({
-            data: reader.result,
-            acceptedFiles,
-          });
           handleFileUpload(reader.result as string);
         };
       }
