@@ -1,7 +1,7 @@
 {
   "name": "img2pdf",
   "version": "0.1.0",
-  "private": true,
+  "description": "Webapp for image to pdf conversion written in React",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -13,6 +13,8 @@
     "@types/react-dom": "^16.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-dropzone": "^11.0.3",
+    "react-html5-camera-photo": "^1.5.4",
     "react-scripts": "3.4.3",
     "tesseract.js": "^2.1.1",
     "typescript": "~3.7.2"
@@ -38,5 +40,6 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "author": "Manish Mishra"
 }

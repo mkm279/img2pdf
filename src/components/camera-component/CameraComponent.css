@@ -1,0 +1,22 @@
+.button-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.button-wrapper button {
+  width: 30px;
+  height: 30px;
+  background: antiquewhite;
+  color: brown;
+  border-radius: 50%;
+  border: none;
+}
+
+@media only screen and (max-width: 440px) {
+  .react-html5-camera-photo #container-circles {
+    bottom: -40%;
+  }
+}
